@@ -11,7 +11,7 @@ interface UseCase {
 const API_URL = process.env.NEXT_PUBLIC_API_URL || "";
 const LENDER_KEY = process.env.NEXT_PUBLIC_LENDER_KEY || "";
 const UC_I_CC_ID = process.env.NEXT_PUBLIC_UC_I_CC_ID || "";
-
+const UC_2_CC_ID = process.env.NEXT_PUBLIC_UC_2_CC_ID || "";
 export const apiUseCases: UseCase[] = [
   {
     title: "Submit Consumer Credit Record",
@@ -165,19 +165,19 @@ export const demoUseCases: UseCase[] = [
   {
     title: "New Account 3rd Party Fraud",
     description:
-      "Fraud rings intentionally BNPL offers by cashing in on it multiple times using duplicate accounts. To make this possible, fraudsters need to create numerous accounts and then cash in on the BNPL offer repeatedly, exponentially increasing their profit.  This fraud causes significant losses for BNPLs that many times go undetected.",
+      "Fraud rings intentionally use BNPL offers by cashing in on it multiple times using duplicate accounts. To make this possible, fraudsters need to create numerous accounts and then cash in on the BNPL offer repeatedly, exponentially increasing their profit.  This fraud causes significant losses for BNPLs that often go undetected.",
     steps: [
       "Fraudster aims to purchase a small ticket item with BNPL 1.",
-      "Transaction size is $250",
+      "The transaction size is $250",
       "Fraudster completes transaction with BNPL 1 and repays in full.",
-      "Fraudster then aims to purchase a couch with BNPL 1 for $1,500 using the same account.",
-      "Fraudster completes the second transaction with $1,075 at credit risk for BNPL 1.",
-      "Fraudster then creates a duplicate account to purchase a different product with BNPL 1.",
-      "Fraudster completes third purchase transaction with BNPL 1 within 5 minutes.",
-      "Transaction size is $1,200 with credit risk exposure of $900.",
+      "The fraudster then aims to purchase a couch with BNPL 1 for $1,500 using the same account.",
+      "The fraudster completes the second transaction with $1,075 at credit risk for BNPL 1.",
+      "The fraudster then creates a duplicate account to purchase a different product with BNPL 1.",
+      "The fraudster completes third purchase transaction with BNPL 1 within 5 minutes.",
+      "The transaction size is $1,200 with a credit risk exposure of $900.",
       "Total credit risk exposure is now $1,975 with BNPL 1.",
-      "Fraudster then attempts to purchase an item with BNPL 2 using the same profile credentials as the first transaction with BNPL 1.",
-      "Transaction size is $250.",
+      "The fraudster then attempts to purchase an item with BNPL 2 using the same profile credentials as the first transaction with BNPL 1.",
+      "The transaction size is $250.",
     ],
     requestConfig: {
       method: "GET",
@@ -186,8 +186,30 @@ export const demoUseCases: UseCase[] = [
     },
     expectedResults: [
       "Using KlearSync to access a KlearProfile match successfully, the BNPL provider is able to benefit by:",
-      "Reducing third party fraud chargeoff by saving a potential loss of $250 (or greater)",
-      "Reduce chargeoff risk resulting from new customers",
+      "Reducing third-party fraud chargeoff by saving a potential loss of $250 (or greater)",
+      "Reduce charge-off risk resulting from new customers",
+    ],
+  },
+  {
+    title: "New Customer Credit Risk",
+    description: "BNPL providers have increased credit risk with new users, and limited view on Lenders have limited tools to view positive & negative payment compliance with other lenders at the time of the first credit decision and as borrowing cycles continue.",
+    steps: [
+      "Customer applies for the first time online for a BNPL product with BNPL provider",
+      "The transaction size is $600",
+      "BNPL provider defaults to a pay-in-four offer, however New users with BNPL provider are typically offered a maximum transaction size of $200.  This makes the new user ineligible to access the BNPL loan.",
+      "The customer is new to the BNPL provider and has never transacted previously with the provider.",
+      "BNPL provider is unsure how the new customer has performed, and is performing, on other short-term credit products.",
+    ],
+    requestConfig: {
+      method: "GET",
+      url: `${API_URL}/consumer-credit/${UC_2_CC_ID}/consumer-match`,
+      headers: [{ key: "Authorization", value: `Apikey ${LENDER_KEY}` }],
+    },
+    expectedResults: [
+      "Using KlearSync to access a KlearProfile match successfully, the BNPL provider can benefit by:",
+      "Increasing their transaction size for a new customer by 400%",
+      "Reduce charge-off risk resulting from new customers",
+      "Increase corresponding revenues from new customer risk-based acquisition",
     ],
   },
 ];
