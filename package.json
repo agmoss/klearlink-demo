@@ -11,7 +11,13 @@
     "format": "prettier --write ."
   },
   "dependencies": {
+    "@emotion/react": "latest",
+    "@emotion/styled": "latest",
     "@hookform/resolvers": "^3.9.1",
+    "@mui/icons-material": "latest",
+    "@mui/lab": "latest",
+    "@mui/material": "latest",
+    "@mui/x-tree-view": "^8.2.0",
     "autoprefixer": "^10.4.20",
     "class-variance-authority": "^0.7.1",
     "clsx": "^2.1.1",
@@ -22,19 +28,14 @@
     "react-dom": "^19",
     "react-hook-form": "^7.54.1",
     "sonner": "^1.7.1",
-    "zod": "^3.24.1",
-    "@emotion/react": "latest",
-    "@emotion/styled": "latest",
-    "@mui/material": "latest",
-    "@mui/lab": "latest",
-    "@mui/icons-material": "latest"
+    "zod": "^3.24.1"
   },
   "devDependencies": {
     "@types/node": "^22",
     "@types/react": "^19",
     "@types/react-dom": "^19",
     "postcss": "^8",
-    "typescript": "^5",
-    "prettier": "^3.2.5"
+    "prettier": "^3.2.5",
+    "typescript": "^5"
   }
 }

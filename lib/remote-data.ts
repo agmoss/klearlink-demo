@@ -49,6 +49,28 @@ export const chain = <T, U>(
   return response as ApiResponse<U>;
 };
 
+// Define a type for the handlers
+type RemoteDataHandlers<T> = {
+  notAsked: () => T;
+  loading: () => T;
+  success: (data: ResponseData) => T;
+  failure: (error: string) => T;
+};
+
+// Pattern matching function for RemoteData
+export function match<T>(response: ApiResponse, handlers: RemoteDataHandlers<T>): T {
+  switch (response.status) {
+    case "not-asked":
+      return handlers.notAsked();
+    case "loading":
+      return handlers.loading();
+    case "success":
+      return handlers.success(response.data);
+    case "failure":
+      return handlers.failure(response.error);
+  }
+}
+
 // Create a new RemoteData in the not-asked state
 export const notAsked = <T>(): ApiResponse<T> => ({ status: "not-asked" });
 

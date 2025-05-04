@@ -1,11 +1,12 @@
 "use client";
 
-import RequestForm from "@/components/request-form";
+import RequestConfigViewer from "@/components/request-config-viewer";
 import ResponseViewer from "@/components/response-viewer";
 import UseCases from "@/components/use-cases";
 import type { ApiResponse } from "@/lib/remote-data";
 import type { RequestConfig } from "@/lib/reqres";
-import { Container, Typography, Box, Paper, Divider } from "@mui/material";
+import { Container, Typography, Box, Paper, Divider, Button } from "@mui/material";
+import { Send } from "@mui/icons-material";
 import { useState } from "react";
 
 export default function Dashboard() {
@@ -99,16 +100,31 @@ export default function Dashboard() {
       <Divider sx={{ my: 6 }} />
 
       <Typography variant="h4" component="h2" gutterBottom>
-        Request Builder
+        Request Configuration
       </Typography>
 
       <Box sx={{ display: "flex", flexDirection: { xs: "column", md: "row" }, gap: 3 }}>
         <Paper sx={{ p: 3, flex: 1 }}>
-          <RequestForm
-            onSubmit={handleRequest}
-            isLoading={response.status === "loading"}
-            initialConfig={currentConfig}
-          />
+          {currentConfig ? (
+            <>
+              <RequestConfigViewer config={currentConfig} />
+              <Box sx={{ mt: 3, display: "flex", justifyContent: "flex-end" }}>
+                <Button
+                  variant="contained"
+                  color="primary"
+                  disabled={response.status === "loading"}
+                  onClick={() => handleRequest(currentConfig)}
+                  startIcon={<Send />}
+                >
+                  {response.status === "loading" ? "Sending..." : "Send Request"}
+                </Button>
+              </Box>
+            </>
+          ) : (
+            <Typography color="text.secondary">
+              Select a use case to view its request configuration
+            </Typography>
+          )}
         </Paper>
 
         <Paper sx={{ p: 3, flex: 1 }}>
