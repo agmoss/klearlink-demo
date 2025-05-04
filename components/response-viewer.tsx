@@ -3,11 +3,12 @@
 import type React from "react";
 import { useState } from "react";
 import { Box, Typography, CircularProgress, Alert, Tabs, Tab, Paper, Chip } from "@mui/material";
-import { TreeView, TreeItem } from "@mui/lab";
+
 import { ExpandMore, ChevronRight } from "@mui/icons-material";
 import { match } from "@/lib/remote-data";
 import type { ApiResponse } from "@/lib/remote-data";
 import { strings } from "./config/strings";
+import RecursiveTree from "./recursive-tree";
 
 interface ResponseViewerProps {
   response: ApiResponse;
@@ -20,38 +21,6 @@ export default function ResponseViewer({ response }: ResponseViewerProps) {
     setActiveTab(newValue);
   };
 
-  // Function to recursively render JSON as TreeItems
-  const renderTree = (data: any, path = "root") => {
-    if (data === null) return <TreeItem key={path} nodeId={path} label="null" />;
-
-    if (typeof data !== "object") {
-      return (
-        <TreeItem
-          key={path}
-          nodeId={path}
-          label={`${typeof data === "string" ? `"${data}"` : data}`}
-        />
-      );
-    }
-
-    if (Array.isArray(data)) {
-      return (
-        <TreeItem key={path} nodeId={path} label={`Array(${data.length})`}>
-          {data.map((item, index) => renderTree(item, `${path}-${index}`))}
-        </TreeItem>
-      );
-    }
-
-    return (
-      <TreeItem key={path} nodeId={path} label="Object">
-        {Object.entries(data).map(([key, value]) => (
-          <TreeItem key={`${path}-${key}`} nodeId={`${path}-${key}`} label={key}>
-            {renderTree(value, `${path}-${key}-value`)}
-          </TreeItem>
-        ))}
-      </TreeItem>
-    );
-  };
 
   // Use pattern matching to render the appropriate UI based on the response state
   return match(response, {
@@ -103,13 +72,7 @@ export default function ResponseViewer({ response }: ResponseViewerProps) {
           {activeTab === 0 && (
             <Paper variant="outlined" sx={{ p: 2, height: "100%", overflow: "auto" }}>
               {typeof responseData.data === "object" ? (
-                <TreeView
-                  defaultCollapseIcon={<ExpandMore />}
-                  defaultExpandIcon={<ChevronRight />}
-                  defaultExpanded={["root"]}
-                >
-                  {renderTree(responseData.data)}
-                </TreeView>
+                <RecursiveTree data={responseData.data} />
               ) : (
                 <Typography
                   component="pre"
@@ -124,17 +87,7 @@ export default function ResponseViewer({ response }: ResponseViewerProps) {
           {/* Headers Tab */}
           {activeTab === 1 && (
             <Paper variant="outlined" sx={{ p: 2, height: "100%", overflow: "auto" }}>
-              <TreeView
-                defaultCollapseIcon={<ExpandMore />}
-                defaultExpandIcon={<ChevronRight />}
-                defaultExpanded={["headers"]}
-              >
-                <TreeItem nodeId="headers" label={strings.response.tabs.headers}>
-                  {Object.entries(responseData.headers).map(([key, value]) => (
-                    <TreeItem key={key} nodeId={`header-${key}`} label={`${key}: ${value}`} />
-                  ))}
-                </TreeItem>
-              </TreeView>
+              <RecursiveTree data={responseData.headers} />
             </Paper>
           )}
 
