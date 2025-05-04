@@ -8,6 +8,7 @@ import type { RequestConfig } from "@/lib/reqres";
 import { Container, Typography, Box, Paper, Divider, Button } from "@mui/material";
 import { Send } from "@mui/icons-material";
 import { useState } from "react";
+import { strings } from "@/components/config/strings";
 
 export default function Dashboard() {
   const [response, setResponse] = useState<ApiResponse>({ status: "not-asked" });
@@ -81,18 +82,17 @@ export default function Dashboard() {
   return (
     <Container maxWidth="lg" sx={{ py: 6 }}>
       <Typography variant="h2" component="h1" gutterBottom>
-        HTTP Request Dashboard
+        {strings.app.title}
       </Typography>
       <Typography variant="body1" sx={{ mb: 4 }}>
-        Configure and test API requests with our interactive dashboard
+        {strings.app.description}
       </Typography>
 
       <Typography variant="h4" component="h2" gutterBottom sx={{ mt: 6, mb: 3 }}>
-        Use Cases
+        {strings.useCases.title}
       </Typography>
       <Typography variant="body1" sx={{ mb: 3 }}>
-        Select a use case below to learn how to use the dashboard for different API request
-        scenarios.
+        {strings.useCases.description}
       </Typography>
 
       <UseCases onLoadUseCase={handleLoadUseCase} />
@@ -100,7 +100,7 @@ export default function Dashboard() {
       <Divider sx={{ my: 6 }} />
 
       <Typography variant="h4" component="h2" gutterBottom>
-        Request Configuration
+        {strings.requestConfig.title}
       </Typography>
 
       <Box sx={{ display: "flex", flexDirection: { xs: "column", md: "row" }, gap: 3 }}>
@@ -116,14 +116,14 @@ export default function Dashboard() {
                   onClick={() => handleRequest(currentConfig)}
                   startIcon={<Send />}
                 >
-                  {response.status === "loading" ? "Sending..." : "Send Request"}
+                  {response.status === "loading"
+                    ? strings.requestConfig.buttons.sending
+                    : strings.requestConfig.buttons.sendRequest}
                 </Button>
               </Box>
             </>
           ) : (
-            <Typography color="text.secondary">
-              Select a use case to view its request configuration
-            </Typography>
+            <Typography color="text.secondary">{strings.requestConfig.noConfigSelected}</Typography>
           )}
         </Paper>
 

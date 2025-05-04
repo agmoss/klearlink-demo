@@ -15,6 +15,7 @@ import {
 } from "@mui/material";
 import { ExpandMore as ExpandMoreIcon } from "@mui/icons-material";
 import type { RequestConfig } from "@/lib/reqres";
+import { strings } from "./config/strings";
 
 interface RequestConfigViewerProps {
   config: RequestConfig;
@@ -24,18 +25,18 @@ export default function RequestConfigViewer({ config }: RequestConfigViewerProps
   return (
     <Box>
       <Typography variant="h6" gutterBottom>
-        Request Configuration
+        {strings.requestConfig.title}
       </Typography>
 
       <Box sx={{ mb: 3, display: "flex", gap: 2, alignItems: "center" }}>
         <Chip
           label={config.method}
           color={
-            config.method === "GET"
+            config.method === strings.requestConfig.method.get
               ? "primary"
-              : config.method === "POST"
+              : config.method === strings.requestConfig.method.post
                 ? "success"
-                : config.method === "PUT"
+                : config.method === strings.requestConfig.method.put
                   ? "info"
                   : "error"
           }
@@ -57,7 +58,7 @@ export default function RequestConfigViewer({ config }: RequestConfigViewerProps
       {config.headers.length > 0 && (
         <Accordion sx={{ mb: 2 }}>
           <AccordionSummary expandIcon={<ExpandMoreIcon />}>
-            <Typography>Headers</Typography>
+            <Typography>{strings.requestConfig.sections.headers}</Typography>
           </AccordionSummary>
           <AccordionDetails>
             <List dense>
@@ -83,7 +84,7 @@ export default function RequestConfigViewer({ config }: RequestConfigViewerProps
       {config.body && (
         <Accordion defaultExpanded sx={{ mb: 2 }}>
           <AccordionSummary expandIcon={<ExpandMoreIcon />}>
-            <Typography>Request Body</Typography>
+            <Typography>{strings.requestConfig.sections.body}</Typography>
           </AccordionSummary>
           <AccordionDetails>
             <Paper variant="outlined" sx={{ p: 2, bgcolor: "background.paper" }}>
