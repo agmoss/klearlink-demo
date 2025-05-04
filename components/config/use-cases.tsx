@@ -8,19 +8,21 @@ interface UseCase {
   expectedResults: string[];
 }
 
-const useCases: UseCase[] = [
+const apiUrl = process.env.NEXT_PUBLIC_API_URL || "https://jsonplaceholder.typicode.com/posts/1";
+
+export const useCases: UseCase[] = [
   {
     title: "Basic GET Request",
     description: "Learn how to make a simple GET request to retrieve data from a public API.",
     steps: [
       "Select GET as the method",
-      "Enter https://jsonplaceholder.typicode.com/posts/1 as the URL",
+      `Enter ${apiUrl}/posts/1 as the URL`,
       "Click 'Send Request'",
       "Observe the JSON response in the response viewer",
     ],
     requestConfig: {
       method: "GET",
-      url: "https://jsonplaceholder.typicode.com/posts/1",
+      url: `${apiUrl}/posts/1`,
       headers: [],
     },
     expectedResults: [
@@ -34,7 +36,7 @@ const useCases: UseCase[] = [
     description: "Learn how to create a resource by sending a POST request with a JSON body.",
     steps: [
       "Select POST as the method",
-      "Enter https://jsonplaceholder.typicode.com/posts as the URL",
+      `Enter ${apiUrl}/posts as the URL`,
       "Add a header with key 'Content-Type' and value 'application/json'",
       "Add the following JSON body:",
       `{
@@ -45,7 +47,7 @@ const useCases: UseCase[] = [
     ],
     requestConfig: {
       method: "POST",
-      url: "https://jsonplaceholder.typicode.com/posts",
+      url: `${apiUrl}/posts`,
       headers: [{ key: "Content-Type", value: "application/json" }],
       body: JSON.stringify(
         {
@@ -68,13 +70,13 @@ const useCases: UseCase[] = [
     description: "Learn how to handle and interpret error responses from APIs.",
     steps: [
       "Select GET as the method",
-      "Enter https://jsonplaceholder.typicode.com/nonexistent as the URL",
+      `Enter ${apiUrl}/nonexistent as the URL`,
       "Click 'Send Request'",
       "Observe the error response in the response viewer",
     ],
     requestConfig: {
       method: "GET",
-      url: "https://jsonplaceholder.typicode.com/nonexistent",
+      url: `${apiUrl}/nonexistent`,
       headers: [],
     },
     expectedResults: [
@@ -88,14 +90,14 @@ const useCases: UseCase[] = [
     description: "Learn how to use request headers to modify API behavior.",
     steps: [
       "Select GET as the method",
-      "Enter https://httpbin.org/headers as the URL",
+      `Enter ${apiUrl}/headers as the URL`,
       "Add a custom header with key 'X-Custom-Header' and value 'MyCustomValue'",
       "Click 'Send Request'",
       "Observe your custom header in the response",
     ],
     requestConfig: {
       method: "GET",
-      url: "https://httpbin.org/headers",
+      url: `${apiUrl}/headers`,
       headers: [{ key: "X-Custom-Header", value: "MyCustomValue" }],
     },
     expectedResults: [

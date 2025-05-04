@@ -103,8 +103,15 @@ export default function Dashboard() {
         {strings.requestConfig.title}
       </Typography>
 
-      <Box sx={{ display: "flex", flexDirection: { xs: "column", md: "row" }, gap: 3 }}>
-        <Paper sx={{ p: 3, flex: 1 }}>
+      <Box
+        sx={{
+          display: "flex",
+          flexDirection: { xs: "column", md: "row" },
+          gap: 3,
+          alignItems: "stretch",
+        }}
+      >
+        <Paper sx={{ p: 3, flex: 1, display: "flex", flexDirection: "column", minHeight: 400 }}>
           {currentConfig ? (
             <>
               <RequestConfigViewer config={currentConfig} />
@@ -127,7 +134,7 @@ export default function Dashboard() {
           )}
         </Paper>
 
-        <Paper sx={{ p: 3, flex: 1 }}>
+        <Paper sx={{ p: 3, flex: 1, display: "flex", flexDirection: "column", minHeight: 400 }}>
           <ResponseViewer response={response} />
         </Paper>
       </Box>

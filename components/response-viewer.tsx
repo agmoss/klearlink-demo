@@ -4,7 +4,6 @@ import type React from "react";
 import { useState } from "react";
 import { Box, Typography, CircularProgress, Alert, Tabs, Tab, Paper, Chip } from "@mui/material";
 
-import { ExpandMore, ChevronRight } from "@mui/icons-material";
 import { match } from "@/lib/remote-data";
 import type { ApiResponse } from "@/lib/remote-data";
 import { strings } from "./config/strings";
@@ -21,11 +20,10 @@ export default function ResponseViewer({ response }: ResponseViewerProps) {
     setActiveTab(newValue);
   };
 
-
   // Use pattern matching to render the appropriate UI based on the response state
   return match(response, {
     notAsked: () => (
-      <Box>
+      <Box sx={{ height: "100%", flex: 1, display: "flex", flexDirection: "column" }}>
         <Typography variant="h6" gutterBottom>
           {strings.response.title}
         </Typography>
@@ -33,12 +31,29 @@ export default function ResponseViewer({ response }: ResponseViewerProps) {
       </Box>
     ),
     loading: () => (
-      <Box sx={{ display: "flex", justifyContent: "center", alignItems: "center", height: 400 }}>
+      <Box
+        sx={{
+          display: "flex",
+          justifyContent: "center",
+          alignItems: "center",
+          height: "100%",
+          flex: 1,
+        }}
+      >
         <CircularProgress />
       </Box>
     ),
     failure: error => (
-      <Box>
+      <Box
+        sx={{
+          height: "100%",
+          flex: 1,
+          display: "flex",
+          flexDirection: "column",
+          justifyContent: "center",
+          alignItems: "center",
+        }}
+      >
         <Typography variant="h6" gutterBottom>
           {strings.response.title}
         </Typography>
@@ -46,7 +61,7 @@ export default function ResponseViewer({ response }: ResponseViewerProps) {
       </Box>
     ),
     success: responseData => (
-      <Box>
+      <Box sx={{ height: "100%", flex: 1, display: "flex", flexDirection: "column" }}>
         <Typography variant="h6" gutterBottom>
           {strings.response.title}
         </Typography>
@@ -67,7 +82,7 @@ export default function ResponseViewer({ response }: ResponseViewerProps) {
           </Tabs>
         </Box>
 
-        <Box sx={{ height: 400, overflow: "auto" }}>
+        <Box sx={{ flex: 1, minHeight: 0, overflow: "auto" }}>
           {/* Body Tab */}
           {activeTab === 0 && (
             <Paper variant="outlined" sx={{ p: 2, height: "100%", overflow: "auto" }}>
