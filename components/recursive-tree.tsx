@@ -21,21 +21,17 @@ const renderTree = (nodes: Record<string, any>, nodeId: string = "") => {
         <TreeItem key={currentId} itemId={currentId} label={key}>
           {Array.isArray(value)
             ? value.map((item, idx) => (
-                <>
+                <div key={`${currentId}-${idx}`}>
                   <Divider />
                   {renderTree(item, `${currentId}-${idx}`)}
-                </>
+                </div>
               ))
             : renderTree(value, currentId)}
         </TreeItem>
       );
     } else {
       // Value
-      return (
-        <>
-          <TreeItem key={currentId} itemId={currentId} label={`${key}: ${value}`} />
-        </>
-      );
+      return <TreeItem key={currentId} itemId={currentId} label={`${key}: ${value}`} />;
     }
   });
 };

@@ -25,9 +25,7 @@ import {
   Settings,
 } from "@mui/icons-material";
 import type { RequestConfig } from "@/lib/reqres";
-import { useCases } from "./config/use-cases";
-
-const apiUrl = process.env.NEXT_PUBLIC_API_URL || "https://jsonplaceholder.typicode.com/posts/1";
+import { demoUseCases } from "./config/use-cases";
 
 interface TabPanelProps {
   children?: React.ReactNode;
@@ -84,7 +82,7 @@ export default function UseCases({ onLoadUseCase }: UseCasesProps) {
           allowScrollButtonsMobile
           aria-label="use cases tabs"
         >
-          {useCases.map((useCase, index) => (
+          {demoUseCases.map((useCase, index) => (
             <Tab
               key={index}
               label={useCase.title}
@@ -106,7 +104,7 @@ export default function UseCases({ onLoadUseCase }: UseCasesProps) {
         </Tabs>
       </Box>
 
-      {useCases.map((useCase, index) => (
+      {demoUseCases.map((useCase, index) => (
         <TabPanel key={index} value={value} index={index}>
           <Typography variant="h5" component="h3" gutterBottom color="primary">
             {useCase.title}
