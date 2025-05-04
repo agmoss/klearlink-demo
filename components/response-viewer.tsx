@@ -6,7 +6,7 @@ import { Box, Typography, CircularProgress, Alert, Tabs, Tab, Paper, Chip } from
 
 import { match } from "@/lib/remote-data";
 import type { ApiResponse } from "@/lib/remote-data";
-import { strings } from "./config/strings";
+import { strings } from "@/lib/strings";
 import RecursiveTree from "./recursive-tree";
 
 interface ResponseViewerProps {

@@ -8,7 +8,3 @@ export default function RootLayout({
 }>) {
   return <ClientLayout>{children}</ClientLayout>;
 }
-
-export const metadata = {
-  generator: "v0.dev",
-};

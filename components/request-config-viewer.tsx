@@ -15,7 +15,7 @@ import {
 } from "@mui/material";
 import { ExpandMore as ExpandMoreIcon } from "@mui/icons-material";
 import type { RequestConfig } from "@/lib/reqres";
-import { strings } from "./config/strings";
+import { strings } from "@/lib/strings";
 
 interface RequestConfigViewerProps {
   config: RequestConfig;

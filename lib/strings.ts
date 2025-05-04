@@ -1,7 +1,7 @@
 export const strings = {
   app: {
-    title: "HTTP Request Dashboard",
-    description: "Configure and test API requests with our interactive dashboard",
+    title: "Klearlink Demo",
+    description: "Configure and test use cases of the Klearlink API",
   },
   useCases: {
     title: "Use Cases",

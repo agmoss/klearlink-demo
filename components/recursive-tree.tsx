@@ -2,7 +2,7 @@ import {
   ChevronRight as ChevronRightIcon,
   ExpandMore as ExpandMoreIcon,
 } from "@mui/icons-material";
-import { Divider } from "@mui/material";
+import { Button, Divider, Stack } from "@mui/material";
 import Box from "@mui/material/Box";
 import { TreeItem } from "@mui/x-tree-view/TreeItem";
 import { SimpleTreeView } from "@mui/x-tree-view/SimpleTreeView";
@@ -36,17 +36,45 @@ const renderTree = (nodes: Record<string, any>, nodeId: string = "") => {
   });
 };
 
+const collectKeys = (nodes: Record<string, any>, nodeId: string = ""): string[] => {
+  return Object.entries(nodes).reduce((acc, [key, value]) => {
+    const currentId = nodeId ? `${nodeId}-${key}` : key;
+    acc.push(currentId);
+
+    if (value !== null && typeof value === "object") {
+      if (Array.isArray(value)) {
+        value.forEach((item, idx) => {
+          acc.push(...collectKeys(item, `${currentId}-${idx}`));
+        });
+      } else {
+        acc.push(...collectKeys(value, currentId));
+      }
+    }
+
+    return acc;
+  }, [] as string[]);
+};
+
 const RecursiveTree: React.FC<IRecursiveTree> = ({ data }: IRecursiveTree) => {
+  const allKeys = React.useMemo(() => collectKeys(data), [data]);
+  const [expandedItems, setExpandedItems] = React.useState<string[]>([]);
+
+  const handleExpandClick = () => {
+    setExpandedItems(prev => (prev.length === 0 ? allKeys : []));
+  };
+
   return (
     <Box>
-      <SimpleTreeView
-        aria-label="rich object"
-        //defaultCollapseIcon={<ExpandMoreIcon />}
-        //defaultExpanded={["root"]}
-        //defaultExpandIcon={<ChevronRightIcon />}
-      >
-        {renderTree(data)}
-      </SimpleTreeView>
+      <Stack spacing={2}>
+        <div>
+          <Button onClick={handleExpandClick}>
+            {expandedItems.length === 0 ? "Expand all" : "Collapse all"}
+          </Button>
+        </div>
+        <SimpleTreeView aria-label="rich object" expandedItems={expandedItems}>
+          {renderTree(data)}
+        </SimpleTreeView>
+      </Stack>
     </Box>
   );
 };

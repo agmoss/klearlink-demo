@@ -192,7 +192,8 @@ export const demoUseCases: UseCase[] = [
   },
   {
     title: "New Customer Credit Risk",
-    description: "BNPL providers have increased credit risk with new users, and limited view on Lenders have limited tools to view positive & negative payment compliance with other lenders at the time of the first credit decision and as borrowing cycles continue.",
+    description:
+      "BNPL providers have increased credit risk with new users, and limited view on Lenders have limited tools to view positive & negative payment compliance with other lenders at the time of the first credit decision and as borrowing cycles continue.",
     steps: [
       "Customer applies for the first time online for a BNPL product with BNPL provider",
       "The transaction size is $600",

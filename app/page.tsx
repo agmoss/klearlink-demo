@@ -8,7 +8,7 @@ import type { RequestConfig } from "@/lib/reqres";
 import { Container, Typography, Box, Paper, Divider, Button } from "@mui/material";
 import { Send } from "@mui/icons-material";
 import { useState } from "react";
-import { strings } from "@/components/config/strings";
+import { strings } from "@/lib/strings";
 
 export default function Dashboard() {
   const [response, setResponse] = useState<ApiResponse>({ status: "not-asked" });
@@ -111,7 +111,16 @@ export default function Dashboard() {
           alignItems: "stretch",
         }}
       >
-        <Paper sx={{ p: 3, flex: 1, display: "flex", flexDirection: "column", minHeight: 400 }}>
+        <Paper
+          sx={{
+            p: 3,
+            flex: 1,
+            display: "flex",
+            flexDirection: "column",
+            minHeight: 400,
+            maxHeight: 400,
+          }}
+        >
           {currentConfig ? (
             <>
               <RequestConfigViewer config={currentConfig} />
@@ -134,7 +143,7 @@ export default function Dashboard() {
           )}
         </Paper>
 
-        <Paper sx={{ p: 3, flex: 1, display: "flex", flexDirection: "column", minHeight: 400 }}>
+        <Paper sx={{ p: 3, flex: 1, display: "flex", flexDirection: "column", minHeight: 550 }}>
           <ResponseViewer response={response} />
         </Paper>
       </Box>

@@ -25,7 +25,7 @@ import {
   Settings,
 } from "@mui/icons-material";
 import type { RequestConfig } from "@/lib/reqres";
-import { demoUseCases } from "./config/use-cases";
+import { demoUseCases } from "@/lib/use-cases";
 
 interface TabPanelProps {
   children?: React.ReactNode;
