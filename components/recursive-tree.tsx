@@ -15,18 +15,31 @@ interface IRecursiveTree {
 const renderTree = (nodes: Record<string, any>, nodeId: string = "") => {
   return Object.entries(nodes).map(([key, value], index) => {
     const currentId = nodeId ? `${nodeId}-${key}` : key;
-    if (value !== null && typeof value === "object") {
-      // Object or Array
+    if (Array.isArray(value)) {
+      // Check if array of primitives
+      if (value.every(item => typeof item !== "object" || item === null)) {
+        // Render as a single string
+        return (
+          <TreeItem key={currentId} itemId={currentId} label={`${key}: ${value.join(", ")}`} />
+        );
+      } else {
+        // Array of objects, recurse
+        return (
+          <TreeItem key={currentId} itemId={currentId} label={key}>
+            {value.map((item, idx) => (
+              <div key={`${currentId}-${idx}`}>
+                <Divider />
+                {renderTree(item, `${currentId}-${idx}`)}
+              </div>
+            ))}
+          </TreeItem>
+        );
+      }
+    } else if (value !== null && typeof value === "object") {
+      // Object
       return (
         <TreeItem key={currentId} itemId={currentId} label={key}>
-          {Array.isArray(value)
-            ? value.map((item, idx) => (
-                <div key={`${currentId}-${idx}`}>
-                  <Divider />
-                  {renderTree(item, `${currentId}-${idx}`)}
-                </div>
-              ))
-            : renderTree(value, currentId)}
+          {renderTree(value, currentId)}
         </TreeItem>
       );
     } else {

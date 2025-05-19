@@ -117,7 +117,7 @@ export default function UseCases({ onLoadUseCase }: UseCasesProps) {
           <Box sx={{ display: "flex", flexDirection: { xs: "column", md: "row" }, gap: 3 }}>
             <Box sx={{ flex: 1 }}>
               <Typography variant="h6" gutterBottom sx={{ display: "flex", alignItems: "center" }}>
-                <PlayArrow sx={{ mr: 1 }} /> Steps to Follow
+                <PlayArrow sx={{ mr: 1 }} /> Use Case Description
               </Typography>
               <List>
                 {useCase.steps.map((step, stepIndex) => (
@@ -164,10 +164,17 @@ export default function UseCases({ onLoadUseCase }: UseCasesProps) {
 
             <Box sx={{ flex: 1 }}>
               <Typography variant="h6" gutterBottom sx={{ display: "flex", alignItems: "center" }}>
-                <CheckCircleOutline sx={{ mr: 1 }} /> Expected Results
+                <CheckCircleOutline sx={{ mr: 1 }} /> The Solution
+              </Typography>
+              <Typography
+                variant="subtitle1"
+                gutterBottom
+                sx={{ display: "flex", alignItems: "center" }}
+              >
+                {useCase.expectedResults.solution}
               </Typography>
               <List>
-                {useCase.expectedResults.map((result, resultIndex) => (
+                {useCase.expectedResults.steps.map((result, resultIndex) => (
                   <ListItem key={resultIndex} sx={{ py: 0.5 }}>
                     <ListItemIcon sx={{ minWidth: 36 }}>
                       <CheckCircleOutline fontSize="small" color="primary" />
