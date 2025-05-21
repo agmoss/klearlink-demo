@@ -187,6 +187,31 @@ export const apiUseCases: UseCase[] = [
 
 export const demoUseCases: UseCase[] = [
   {
+    title: "Reduce Chargeoff Risk with Real-Time Decisioning Data",
+    description:
+      "New customers, thin file and unscorable customers present increased chargeoff risk for BNPL providers, with limited tools to perform decisioning using accurate, real-time credit performance and profile data and insights on these customers to mitigate risk.",
+    steps: [
+      "Customer applies for the first time online for a BNPL product with a BNPL provider",
+      "The transaction size is $200",
+      "The customer is new to the BNPL provider and has never transacted previously with the provider.",
+      "BNPL provider is unsure how the new customer has performed, and is performing, on other short-term credit products",
+    ],
+    requestConfig: {
+      method: "GET",
+      url: `${API_URL}/consumer-credit/${UC_3_CC_ID}/consumer-match`,
+      headers: [{ key: "Authorization", value: `Apikey ${LENDER_4_KEY}` }],
+    },
+    expectedResults: {
+      solution:
+        "Using the KlearLink system during initial credit application, the BNPL provider receives a KlearLink match. With this match, the BNPL sees:",
+      steps: [
+        "Granular, positive, and negative BNPL and other sector payment performance: The new customer has one other BNPL tradeline for $100 on their KlearProfile, opened 3 weeks ago. The tradeline is non-compliant.",
+        "Real-time decisioning data on the customer: The customer was recently declined for two other BNPL loans within the last 24 hours.",
+        "View attribute data indicators involving inquiry velocity and origination velocity, as well as over 50 attributes providing insights into the new customer.",
+      ],
+    },
+  },
+  {
     title: "New Customer TTV Optimization",
     description:
       "BNPL providers have increased credit risk with new customers, mitigated in part by offering a lower first-time limit.  Limited options are available to provide real-time positive (& negative) payment compliance with other lenders at the time of the first credit decision in order to optimize the TTV offering to the new customer, without increasing chargeoff risk.",
@@ -235,35 +260,8 @@ export const demoUseCases: UseCase[] = [
         "Using the KlearLink system, the 5th BNPL provider receives a KlearLink match. With this match, BNPL 5 can see:",
       steps: [
         "IP geo-locating data on the original 4 BNPL tradelines on the KlearProfile",
-        "Fraud Scoring - assigns a KlearFraud Score rating based on a combination of likelihood of account duplicity, TxV, # of IP addresses used in the last 1 month, and more.",
+        "Statistics and flags based on a combination of likelihood of account duplicity, TxV, # of IP addresses used in the last 1 month, and more.",
         "Transaction Velocity Flags - returns a flag based on the speed and frequency of sector and non-sector-related transactions.",
-        "Transaction Velocity Score: Attaches a risk score based on the speed and frequency with which the original applications and originations occurred.",
-      ],
-    },
-  },
-  {
-    title: "Reduce Chargeoff Risk with Real-Time Decisioning Data",
-    description:
-      "New customers, thin file and unscorable customers present increased chargeoff risk for BNPL providers, with limited tools to perform decisioning using accurate, real-time credit performance and profile data and insights on these customers to mitigate risk.",
-    steps: [
-      "Customer applies for the first time online for a BNPL product with a BNPL provider",
-      "The transaction size is $200",
-      "The customer is new to the BNPL provider and has never transacted previously with the provider.",
-      "BNPL provider is unsure how the new customer has performed, and is performing, on other short-term credit products",
-    ],
-    requestConfig: {
-      method: "GET",
-      url: `${API_URL}/consumer-credit/${UC_3_CC_ID}/consumer-match`,
-      headers: [{ key: "Authorization", value: `Apikey ${LENDER_4_KEY}` }],
-    },
-    expectedResults: {
-      solution:
-        "Using the KlearLink system during initial credit application, the BNPL provider receives a KlearLink match. With this match, the BNPL sees:",
-      steps: [
-        "Granular, positive, and negative BNPL and other sector payment performance: The new customer has one other BNPL tradeline for $100 on their KlearProfile, opened 3 weeks ago. The tradeline is non-compliant.",
-        "Real-time decisioning data on the customer: The customer was recently declined for two other BNPL loans within the last 24 hours.",
-        "View attribute data indicators involving inquiry velocity and origination velocity, as well as over 50 attributes providing insights into the new customer.",
-        "A KlearScore risk score on the new customer to determine the overall credit quality of the customer based on their KlearProfile data and attributes",
       ],
     },
   },
