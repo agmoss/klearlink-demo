@@ -233,7 +233,7 @@ export const demoUseCases: UseCase[] = [
         "Using the KlearLink system, the BNPL provider receives a KlearLink match. With this match, the BNPL provider is able to see:",
       steps: [
         "Real-time credit profile data providing up-to-the-minute clarity on risk attributes of the customer",
-        "Granular positive payment performance of BNPL and other short-term credit: The new customer has four closed BNPL tradelines on their KlearProfile, and only one active tradeline with another BNPL with an original balance of $400, and a current balance of $100",
+        "Granular positive payment performance of BNPL: The new customer has four closed BNPL tradelines on their KlearProfile, and only one active tradeline with another BNPL with an original balance of $400, and a current balance of $100",
         "Outstanding balances owing and upcoming payments on other short-term credit products that the consumer holds: The New customer has one upcoming payment for $100 that will fully satisfy and close the only outstanding BNPL tradeline on the customer’s KlearProfile",
         "Application and credit consumption velocity rates of the new customer to determine appropriate debt thresholds: The new customer’s KlearProfile indicates no new applications in the last 3 weeks for any short-term credit products reported, indicating that this customer is a paceful consumer of BNPL services and a responsible borrower.",
       ],
@@ -260,7 +260,7 @@ export const demoUseCases: UseCase[] = [
         "Using the KlearLink system, the 5th BNPL provider receives a KlearLink match. With this match, BNPL 5 can see:",
       steps: [
         "IP geo-locating data on the original 4 BNPL tradelines on the KlearProfile",
-        "Statistics and flags based on a combination of likelihood of account duplicity, TxV, # of IP addresses used in the last 1 month, and more.",
+        "Statistics and flags based on a combination of likelihood of account duplicity, Transaction Velocity, # of IP addresses used in the last 1 month and more",
         "Transaction Velocity Flags - returns a flag based on the speed and frequency of sector and non-sector-related transactions.",
       ],
     },
@@ -282,9 +282,9 @@ export const demoUseCases: UseCase[] = [
     },
     expectedResults: {
       solution:
-        "Using the KlearLink system at the time of initial credit application, the BNPL provider receives a KlearLink match and sets up five flags on the KlearWatch system. With these real-time flag notifications, the BNPL 1 sees:",
+        "Using the KlearLink system at the time of initial application for credit, the BNPL provider receives a KlearLink match and sets up 4 flags on the KlearWatch system.",
       steps: [
-        "In the 3 weeks leading up to the returning customer’s purchase request, BNPL obtains a Real-time non-compliance flag alerting BNPL 1 that the customer is non-compliant on two other BNPL tradelines in the data ",
+        "In the 3 weeks leading up to the returning customer’s purchase request, BNPL obtains a Real-time non-compliance flag alerting BNPL 1 that the customer is non-compliant on 3 other BNPL tradelines in data.",
         "Inquiry Flag alerts indicating that the returning customer applied for three other BNPL loans and was declined on 1",
         "Origination Flag Alerts confirming to BNPL 1 that the returning customer obtained two other BNPL loans in the last 7 days.",
         "Granular positive and negative payment performance of BNPL and other short-term credit: The new customer has 3 BNPL tradelines for $200 each on their KlearProfile, all opened within the last 4 weeks with other providers. Every tradeline is non-compliant.",
