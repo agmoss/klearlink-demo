@@ -287,7 +287,6 @@ export const demoUseCases: UseCase[] = [
         "In the 3 weeks leading up to the returning customer’s purchase request, BNPL obtains a Real-time non-compliance flag alerting BNPL 1 that the customer is non-compliant on 3 other BNPL tradelines in data.",
         "Inquiry Flag alerts indicating that the returning customer applied for three other BNPL loans and was declined on 1",
         "Origination Flag Alerts confirming to BNPL 1 that the returning customer obtained two other BNPL loans in the last 7 days.",
-        "Granular positive and negative payment performance of BNPL and other short-term credit: The new customer has 3 BNPL tradelines for $200 each on their KlearProfile, all opened within the last 4 weeks with other providers. Every tradeline is non-compliant.",
       ],
     },
   },
